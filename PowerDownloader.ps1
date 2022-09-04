@@ -1,10 +1,10 @@
 Clear-Host
 
-$ver = "0.1 (Development WIP)"
+$ver = "0.2 (Development WIP)"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
-if(-not(test-path -path yt-dlp.exe -and test-path -path "ffmpeg.exe")){
+if(-not(test-path -path yt-dlp.exe)){
     Write-Warning "La instalacion de PowerDownloader esta dañada (Faltan dependencias)"
     if(Get-Command git){
         $continue = read-host "Escriba [reinstall] para reinstalar la instalacion completa"
@@ -29,6 +29,18 @@ if(-not(test-path -path yt-dlp.exe -and test-path -path "ffmpeg.exe")){
         exit
     }
 }
+if(-not(test-path -path ffmpeg.exe)){
+    Write-Warning "ffmpeg no esta integrado"
+    $confirm = read-host "Deseas descargarlo ahora? (120MB) [download]"
+    if($confirm){
+        Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/releases/download/Dependencies/ffmpeg.exe" -OutFile ffmpeg.exe
+        if(-not($?)){
+            Write-Warning "Ha ocurrido un error al descargar ffmpeg"
+            exit
+        }
+        write-host "Descarga de ffmpeg finalizada" -ForegroundColor Green
+    }
+}
 
 
 
@@ -47,6 +59,10 @@ while($whilemode){
     Write-host "by" -NoNewline
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
+    if(-not(test-path -path ffmpeg.exe)){
+        Write-Warning "ffmpeg no detectado, funcionalidad limitada"
+        write-host ""
+    }
     if($url){
         Write-host "URL: $url"
         Write-host ""
