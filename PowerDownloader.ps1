@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "0.3 (Development Preview)"
+$ver = "0.4 (Development Preview)"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -33,6 +33,7 @@ if(-not(test-path -path ffmpeg.exe)){
     Write-Warning "ffmpeg no esta integrado"
     $confirm = read-host "Deseas descargarlo ahora? (120MB) [download]"
     if($confirm){
+        clear-host
         Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/releases/download/Dependencies/ffmpeg.exe" -OutFile ffmpeg.exe
         if(-not($?)){
             Write-Warning "Ha ocurrido un error al descargar ffmpeg"
@@ -56,15 +57,18 @@ $whilemode = $true
 while($whilemode){
     clear-host
     Write-host "PowerDownloader Version $ver"
-    Write-host "by" -NoNewline
+    Write-host "by " -NoNewline
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
     if(-not(test-path -path ffmpeg.exe)){
         Write-Warning "ffmpeg no detectado, funcionalidad limitada"
         write-host ""
     }
+    if(-not(test-path -path yt-dlg.exe)){
+        write-host "ERROR: yt-dlg no detectado. funcionalidad nula"
+    }
     if($url){
-        Write-host "URL: $url"
+        Write-host "URL: $url" -ForegroundColor Cyan
         Write-host ""
     }
     else{
@@ -93,7 +97,7 @@ while($whilemode){
             write-host "URL: $url"
             Write-host ""
             Write-host "Descargando MP3.." -ForegroundColor Cyan
-            ty-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
+            .\yt-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
             Write-host ""
             write-host "Descarga finalizada" -ForegroundColor Green
             exit
@@ -105,7 +109,7 @@ while($whilemode){
             Clear-Host
             write-host "URL: $url"
             write-host "Descargando la mejor version del contenido..." -ForegroundColor Cyan
-            yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
+            .\yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
             write-host "Descarga inalizada" -ForegroundColor Green
             exit
         }
@@ -119,7 +123,7 @@ while($whilemode){
                 Write-host "Ejecute PowerDownloader en su carpeta o instalelo en un directorio con permisos" -ForegroundColor Yellow
                 exit
             }
-            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/powerdownloader/main/powerdownloader.ps1" -OutFile PowerDownloader.ps1
+            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader.ps1" -OutFile PowerDownloader.ps1
             if(-not($?)){
                 Write-host "Error al descargar la actualizacion"
                 exit
@@ -168,7 +172,7 @@ while($whilemode){
                 write-host ""
                 Write-host "Destino: $HOME\Desktop"
                 write-host "Descargando el contenido..." -ForegroundColor Cyan
-                yt-dlp -o "$HOME\Desktop\%(title)s.%(ext)s" -f $fcode $url
+                .\yt-dlp -o "$HOME\Desktop\%(title)s.%(ext)s" -f $fcode $url
                 write-host ""
                 write-host "Descarga finalizada" -ForegroundColor Cyan
                 exit
