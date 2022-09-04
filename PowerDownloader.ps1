@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "1.0"
+$ver = "1.1"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -64,7 +64,7 @@ while($whilemode){
         Write-Warning "ffmpeg no detectado, funcionalidad limitada"
         write-host ""
     }
-    if(-not(test-path -path yt-dlg.exe)){
+    if(-not(test-path -path yt-dlp.exe)){
         write-host "ERROR: yt-dlg no detectado. funcionalidad nula"
     }
     if($url){
