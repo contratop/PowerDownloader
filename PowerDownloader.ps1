@@ -65,7 +65,7 @@ while($whilemode){
         write-host ""
     }
     if(-not(test-path -path yt-dlp.exe)){
-        write-host "ERROR: yt-dlg no detectado. funcionalidad nula"
+        write-host "ERROR: yt-dlp no detectado. funcionalidad nula"
     }
     if($url){
         Write-host "URL: $url" -ForegroundColor Cyan
