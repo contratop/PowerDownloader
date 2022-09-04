@@ -1,2 +1,2 @@
 # PowerDownloader
-Descargador de contenido con PowerShell
+Descargador de contenido con PowerShell para Windows
