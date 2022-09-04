@@ -61,11 +61,11 @@ while($whilemode){
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
     if(-not(test-path -path ffmpeg.exe)){
-        Write-Warning "ffmpeg no detectado, funcionalidad limitada"
+        Write-Warning "ffmpeg no detectado, funcionalidad limitada" -ForegroundColor Yellow
         write-host ""
     }
     if(-not(test-path -path yt-dlp.exe)){
-        write-host "ERROR: yt-dlp no detectado. funcionalidad nula"
+        write-host "ERROR: yt-dlp no detectado. funcionalidad nula" -ForegroundColor Red
     }
     if($url){
         Write-host "URL: $url" -ForegroundColor Cyan
