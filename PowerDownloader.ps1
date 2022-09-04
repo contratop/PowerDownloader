@@ -135,7 +135,7 @@ while($whilemode){
             write-host ""
             Write-host "PowerDownloader $ver" -ForegroundColor Cyan
             write-host "Hecho por ContratopDev en Powershell"
-            write-host "Para WIndows 7 en adelante"
+            write-host "Para Windows 7 en adelante"
             write-host "Quieres version android? consulta el README.md"
             Pause
         }
