@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "1.3"
+$ver = "1.4"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -71,7 +71,12 @@ while($whilemode){
         Write-host "URL: $url" -ForegroundColor Cyan
         Write-host ""
         $urltitle = Invoke-RestMethod "https://title.mihir.ch/$url"
-        write-host "Titulo: $urltitle" -ForegroundColor Cyan
+        if($?){
+            write-host "Titulo: $urltitle" -ForegroundColor Cyan
+        }
+        else{
+            Write-Warning "No se puede obtener el titulo"
+        }
     }
     else{
         Write-host "URL aun no seleccionada"
