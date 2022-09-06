@@ -1,45 +1,45 @@
 Clear-Host
 
-$ver = "1.4"
+$ver = "1.5"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
 if(-not(test-path -path yt-dlp.exe)){
-    Write-Warning "La instalacion de PowerDownloader esta dañada (Faltan dependencias)"
+    Write-Warning "This installation of PowerDownloader is damaged (missing dependencies)"
     if(Get-Command git){
-        $continue = read-host "Escriba [reinstall] para reinstalar la instalacion completa"
+        $continue = read-host "Write [reinstall] to reinstall PowerDownloader completely"
         if($continue -eq "reinstall"){
             $savedpwd = $PWD
             Set-Location ..
             Remove-Item -Recurse -Force $savedpwd
             git clone github.com/contratop/powerdownloader
             Set-Location powerdownloader
-            Write-host "Reinstalacion completada, reinicie PowerDownloader" -ForegroundColor Green
+            Write-host "Reinstalation completed, please re-start PowerDownloader" -ForegroundColor Green
             exit
         }
         else{
-            Write-Warning "No se puede proceder sin reinstall"
-            write-host "Esta instalacion esta dañada" -ForegroundColor Yellow
+            Write-Warning "Can not go on without reinstalling"
+            write-host "This installation is damaged" -ForegroundColor Yellow
             exit
         }
     }
     else{
-        Write-Warning "No se puede reinstalar automaticamentes porque falta git"
-        write-host "Elimine PowerDownloader y reinstalelo de nuevo manualmente"
+        Write-Warning "Can not reinstall automatically, missing git"
+        write-host "Please delete PowerDownloader and reinstall it manually"
         exit
     }
 }
 if(-not(test-path -path ffmpeg.exe)){
-    Write-Warning "ffmpeg no esta integrado"
-    $confirm = read-host "Deseas descargarlo ahora? (120MB) [download]"
+    Write-Warning "ffmpeg is not integrated"
+    $confirm = read-host "Do you want to download ffmpeg now? (120MB) [download]"
     if($confirm){
         clear-host
         Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/releases/download/Dependencies/ffmpeg.exe" -OutFile ffmpeg.exe
         if(-not($?)){
-            Write-Warning "Ha ocurrido un error al descargar ffmpeg"
+            Write-Warning "There was an error trying to download ffmpeg"
             exit
         }
-        write-host "Descarga de ffmpeg finalizada" -ForegroundColor Green
+        write-host "ffmpeg was downloades successfully" -ForegroundColor Green
     }
 }
 
@@ -47,7 +47,7 @@ if(-not(test-path -path ffmpeg.exe)){
 
 
 function geturl{
-    $script:url = read-host "Pega la URL aqui"
+    $script:url = read-host "Paste your URL here"
 }
 
 ########################
@@ -61,37 +61,37 @@ while($whilemode){
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
     if(-not(test-path -path ffmpeg.exe)){
-        Write-Warning "ffmpeg no detectado, funcionalidad limitada" -ForegroundColor Yellow
+        Write-Warning "Could not find ffmpeg,functionality is limited" -ForegroundColor Yellow
         write-host ""
     }
     if(-not(test-path -path yt-dlp.exe)){
-        write-host "ERROR: yt-dlp no detectado. funcionalidad nula" -ForegroundColor Red
+        write-host "ERROR: could not find yt-dlp. Null functionality" -ForegroundColor Red
     }
     if($url){
         Write-host "URL: $url" -ForegroundColor Cyan
         Write-host ""
         $urltitle = Invoke-RestMethod "https://title.mihir.ch/$url"
         if($?){
-            write-host "Titulo: $urltitle" -ForegroundColor Cyan
+            write-host "Title: $urltitle" -ForegroundColor Cyan
         }
         else{
-            Write-Warning "No se puede obtener el titulo"
+            Write-Warning "Could not obtain title"
         }
     }
     else{
-        Write-host "URL aun no seleccionada"
+        Write-host "URL not selected yet"
         Write-host ""
     }
-    Write-host "[url] Seleccionar una URL de antemano"
-    Write-host "[1] Musica"
-    Write-host "[2] Video / Contenido Integro"
-    Write-host "[3] Actualizar"
+    Write-host "[url] Pick an url beforehand"
+    Write-host "[1] Music" -ForegroundColor Cyan
+    Write-host "[2] Video / Full content"
+    Write-host "[3] Update" -ForegroundColor Cyan
     Write-host "[4] About"
-    Write-host "[5] Salir"
+    Write-host "[5] Quit" -ForegroundColor Cyan
     Write-host ""
-    Write-host "[advanced] Descarga Personalizada"
+    Write-host "[advanced] Custom download"
     Write-host ""
-    $decision = read-host "Seleccione una opcion"
+    $decision = read-host "Pick an option"
     switch($decision){
         url {
             geturl
@@ -103,10 +103,10 @@ while($whilemode){
             Clear-Host
             write-host "URL: $url"
             Write-host ""
-            Write-host "Descargando MP3.." -ForegroundColor Cyan
+            Write-host "Downloading MP3.." -ForegroundColor Cyan
             .\yt-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
             Write-host ""
-            write-host "Descarga finalizada" -ForegroundColor Green
+            write-host "Successfully downloaded" -ForegroundColor Green
             exit
         }
         2{
@@ -115,40 +115,40 @@ while($whilemode){
             }
             Clear-Host
             write-host "URL: $url"
-            write-host "Descargando la mejor version del contenido..." -ForegroundColor Cyan
+            write-host "Downloading content in the best quality possible..." -ForegroundColor Cyan
             .\yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
-            write-host "Descarga inalizada" -ForegroundColor Green
+            write-host "Download initialized" -ForegroundColor Green
             exit
         }
         3 {
             write-host ""
-            write-host "Actualizando PowerDownloader" -ForegroundColor Yellow
+            write-host "Updating PowerDownloader" -ForegroundColor Yellow
             Write-Host ""
             Remove-Item PowerDownloader.ps1
             if(-not($?)){
-                Write-Warning "No se puede eliminar la version anterior"
-                Write-host "Ejecute PowerDownloader en su carpeta o instalelo en un directorio con permisos" -ForegroundColor Yellow
+                Write-Warning "Could not delete the previous version"
+                Write-host "Please run PowerDownloader in it's folder or install in a directory with permits" -ForegroundColor Yellow
                 exit
             }
             Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader.ps1" -OutFile PowerDownloader.ps1
             if(-not($?)){
-                Write-host "Error al descargar la actualizacion"
+                Write-host "Error when downloading the update"
                 exit
             }
-            Write-host "Actualizacion finalizada" -ForegroundColor Green
+            Write-host "Updated succesfully" -ForegroundColor Green
             exit
         }
         4 {
             write-host ""
             Write-host "PowerDownloader $ver" -ForegroundColor Cyan
-            write-host "Hecho por ContratopDev en Powershell"
-            write-host "Para Windows 7 en adelante"
-            write-host "Quieres version android? consulta el README.md"
+            write-host "Made by ContratopDev in Powershell"
+            write-host "For windows 7 owards"
+            write-host "Want it for android? check README.md"
             Pause
         }
         5{
             Clear-Host
-            write-host "Saliendo de PowerDownloader..." -ForegroundColor Cyan
+            write-host "Exiting PowerDownloader..." -ForegroundColor Cyan
             exit
         }
         advanced {
@@ -157,14 +157,14 @@ while($whilemode){
             }
             Clear-Host
             write-host "URL: $url"
-            write-host "OBteniendo lista de formatos..." -ForegroundColor Cyan
+            write-host "Obtaining format list..." -ForegroundColor Cyan
             yt-dlp -F $url
             write-host ""
-            write-host "Si hay algun error, escribe [back]" -ForegroundColor Yellow
-            write-host "Tambien puedes [best] para la mejor opcion" -ForegroundColor Cyan
-            $fcode = read-host "Selecciona un formato"
+            write-host "If there's any error, please type [back]" -ForegroundColor Yellow
+            write-host "You can also use [best] for the best option in your case" -ForegroundColor Cyan
+            $fcode = read-host "Select a format"
             if($fcode -eq "Back"){
-                write-host "Revirtiendo cambios"
+                write-host "Reversing changes"
                 Start-Sleep -s 2
             }
             else {
@@ -177,11 +177,11 @@ while($whilemode){
                     write-host "Format code: $fcode (Manual)"
                 }
                 write-host ""
-                Write-host "Destino: $HOME\Desktop"
-                write-host "Descargando el contenido..." -ForegroundColor Cyan
+                Write-host "Destination: $HOME\Desktop"
+                write-host "Downloading content..." -ForegroundColor Cyan
                 .\yt-dlp -o "$HOME\Desktop\%(title)s.%(ext)s" -f $fcode $url
                 write-host ""
-                write-host "Descarga finalizada" -ForegroundColor Cyan
+                write-host "Successfully downloaded" -ForegroundColor Cyan
                 exit
             }
         }   
@@ -190,7 +190,7 @@ while($whilemode){
 
 
         default {
-            Write-Warning "Opcion no valida"
+            Write-Warning "This option is not valid"
             start-sleep -s 2}
     } 
 }
