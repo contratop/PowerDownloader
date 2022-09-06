@@ -61,7 +61,7 @@ while($whilemode){
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
     if(-not(test-path -path ffmpeg.exe)){
-        Write-Warning "Could not find ffmpeg,functionality is limited" -ForegroundColor Yellow
+        Write-Warning "Could not find ffmpeg, functionality is limited" -ForegroundColor Yellow
         write-host ""
     }
     if(-not(test-path -path yt-dlp.exe)){
