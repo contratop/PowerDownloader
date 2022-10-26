@@ -4,6 +4,15 @@ $ver = "1.5"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
+if(-not(test-path -path PowerDownloader-Windows.ps1)){
+    Write-host "PowerDownloader-Windows.ps1 not found in current directory. Please run this script from the same directory as PowerDownloader-Windows.ps1"
+    exit
+}
+else{
+    Write-host "Directory check passed." -ForegroundColor Green
+}
+
+
 if(-not(test-path -path yt-dlp.exe)){
     Write-Warning "This installation of PowerDownloader is damaged (missing dependencies)"
     if(Get-Command git){
@@ -117,20 +126,20 @@ while($whilemode){
             write-host "URL: $url"
             write-host "Downloading content in the best quality possible..." -ForegroundColor Cyan
             .\yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
-            write-host "Download initialized" -ForegroundColor Green
+            write-host "Download finished" -ForegroundColor Green
             exit
         }
         3 {
             write-host ""
             write-host "Updating PowerDownloader" -ForegroundColor Yellow
             Write-Host ""
-            Remove-Item PowerDownloader.ps1
+            Remove-Item PowerDownloader-Windows.ps1
             if(-not($?)){
                 Write-Warning "Could not delete the previous version"
                 Write-host "Please run PowerDownloader in it's folder or install in a directory with permits" -ForegroundColor Yellow
                 exit
             }
-            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader.ps1" -OutFile PowerDownloader.ps1
+            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader-Windows.ps1" -OutFile PowerDownloader-Windows.ps1
             if(-not($?)){
                 Write-host "Error when downloading the update"
                 exit
