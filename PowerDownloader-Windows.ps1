@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "1.5"
+$ver = "1.7"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -169,9 +169,10 @@ while($whilemode){
             write-host "Obtaining format list..." -ForegroundColor Cyan
             yt-dlp -F $url
             write-host ""
-            write-host "If there's any error, please type [back]" -ForegroundColor Yellow
+            write-host "If there's any error, please type" -ForegroundColor Cyan -NoNewline
+            write-host "[back]" -ForegroundColor Yellow
             write-host "You can also use [best] for the best option in your case" -ForegroundColor Cyan
-            $fcode = read-host "Select a format"
+            $fcode = read-host "Select code format"
             if($fcode -eq "Back"){
                 write-host "Reversing changes"
                 Start-Sleep -s 2
@@ -186,11 +187,10 @@ while($whilemode){
                     write-host "Format code: $fcode (Manual)"
                 }
                 write-host ""
-                Write-host "Destination: $HOME\Desktop"
                 write-host "Downloading content..." -ForegroundColor Cyan
-                .\yt-dlp -o "$HOME\Desktop\%(title)s.%(ext)s" -f $fcode $url
+                .\yt-dlp -o "%(title)s.%(ext)s" -f $fcode $url
                 write-host ""
-                write-host "Successfully downloaded" -ForegroundColor Cyan
+                write-host "Successfully downloaded" -ForegroundColor Green
                 exit
             }
         }   
