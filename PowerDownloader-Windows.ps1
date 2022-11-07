@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "1.7"
+$ver = "2.0"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -98,6 +98,7 @@ while($whilemode){
     Write-host "[4] About"
     Write-host "[5] Quit" -ForegroundColor Cyan
     Write-host ""
+    Write-host "[torrent] Torrent mode" -ForegroundColor Green
     Write-host "[advanced] Custom download"
     Write-host ""
     $decision = read-host "Pick an option"
@@ -193,7 +194,34 @@ while($whilemode){
                 write-host "Successfully downloaded" -ForegroundColor Green
                 exit
             }
-        }   
+        }
+        "torrent" {
+            Clear-Host
+            ### Check PowerTorrent-Windows ###
+            if(-not(test-path -path PowerTorrent-Windows.ps1)){
+                Write-Warning "PowerTorrent-Windows.ps1 not found"
+                if(-not(test-path -path yt-dlp.exe)){
+                    Write-Warning "Not on the same directory or PowerDownloader damaged"
+                    $null = read-host "Press enter to exit"
+                    break
+                }
+                write-host "Downloading..."
+                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Windows.ps1" -OutFile "PowerTorrent-Windows.ps1"
+                if(-not($?)){
+                    Write-Warning "Could not download PowerTorrent-Windows.ps1"
+                    $null = read-host "Press enter to exit"
+                    break
+                }
+                else{
+                    Write-host "Downloaded successfully" -ForegroundColor Green
+                    Start-Sleep -s 2
+                }
+            }
+            ### Start PowerTorrent Windows ###
+            .\PowerTorrent-Windows.ps1
+            write-host "PowerTorrent finished" -ForegroundColor Green
+            $null = read-host "Press enter to back to PowerDownloader Menu"
+        }  
 
 
 

@@ -2,7 +2,7 @@
 clear-host
 
 $host.ui.RawUI.WindowTitle = "PowerTorrent by ContratopDev"
-$ver = "0.3"
+$ver = "0.4"
 
 function checkaria2 {
     $script:architectureproc = (Get-WmiObject -Class Win32_ComputerSystem).SystemType
@@ -118,6 +118,10 @@ while ($loopmenu1) {
 
         "pwd" {
             workdirselect
+        }
+
+        "r" {
+            checkaria2
         }
 
         "x" {
