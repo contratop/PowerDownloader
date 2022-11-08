@@ -158,7 +158,7 @@ while ($whilemode) {
                     exit
                 }
             }
-            Invoke-WebRequest "https://raw.githubusercontent.com/ContratopDev/PowerDownloader/main/PowerDownloader-Linux.dat" -OutFile PowerDownloader-Linux.dat
+            Invoke-WebRequest "https://raw.githubusercontent.com/ContratopDev/PowerDownloader/main/PowerDownloader-Linux.ps1" -OutFile PowerDownloader-Linux.ps1
             if (-not($?)) {
                 write-warning "Error when downloading the update"
                 exit

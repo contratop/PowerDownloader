@@ -153,7 +153,7 @@ while($whilemode){
                 Write-host "Please run PowerDownloader in it's folder or install in a directory with permits" -ForegroundColor Yellow
                 exit
             }
-            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader-Windows.dat" -OutFile PowerDownloader-Windows.dat
+            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader-Windows.ps1" -OutFile PowerDownloader-Windows.ps1
             if(-not($?)){
                 Write-host "Error when downloading the update"
                 exit
