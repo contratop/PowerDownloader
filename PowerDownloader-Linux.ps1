@@ -103,7 +103,7 @@ while ($whilemode) {
     write-host "[torrent] Torrent mode" -ForegroundColor Green
     write-host "[advanced] Custom download"
     write-host ""
-    $decision = read.host "pick an option"
+    $decision = read-host "pick an option"
     switch ($decision) {
         "url" { geturl }
         "1" {
