@@ -83,6 +83,19 @@ function safechecklinux {
 
 ""
 ""
+write-host "[1] Windows Mode"
+write-host "[2] Linux Mode"
+$mode = Read-Host "Select Mode"
+if ($mode -eq "1") {
+    safecheckwin
+}
+elseif ($mode -eq "2") {
+    safechecklinux
+}
+else {
+    write-host "Invalid Mode"
+    break
+}
 
 
 $confirm = Read-Host "to update, type [update]"
