@@ -69,7 +69,7 @@ $whilemode = $true
 while ($whilemode) {
     Clear-Host
     write-host "PowerDownloader Debian Version $ver"
-    write-host "by" -NoNewline
+    write-host "by " -NoNewline
     write-host "ContratopDev" -foregroundcolor Cyan
     write-host ""
     if (-not(get-command yt-dlp)) {
