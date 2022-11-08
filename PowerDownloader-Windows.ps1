@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "2.0"
+$ver = "2.1 Development"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -53,7 +53,18 @@ if(-not(test-path -path ffmpeg.exe)){
 }
 
 
-
+if(-not(test-path -path powerdownloads)){
+    if(test-path -path yt-dlp.exe){
+        write-host "Powerdownloaded folder not found, creating it..."
+        New-Item -ItemType Directory -Path powerdownloads
+        write-host "Powerdownloads folder created" -ForegroundColor Green
+    }
+    else{
+        write-warning "yt-dlp not found or PowerDownloader is damaged"
+        write-host "Same directory?"
+        break
+    }
+}
 
 function geturl{
     $script:url = read-host "Paste your URL here"
@@ -114,7 +125,7 @@ while($whilemode){
             write-host "URL: $url"
             Write-host ""
             Write-host "Downloading MP3.." -ForegroundColor Cyan
-            .\yt-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
+            .\yt-dlp -o "powerdownloads\%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
             Write-host ""
             write-host "Successfully downloaded" -ForegroundColor Green
             exit
@@ -126,7 +137,7 @@ while($whilemode){
             Clear-Host
             write-host "URL: $url"
             write-host "Downloading content in the best quality possible..." -ForegroundColor Cyan
-            .\yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
+            .\yt-dlp -S ext:mp4:m4a -o "powerdownloads\%(title)s.%(ext)s" $url
             write-host "Download finished" -ForegroundColor Green
             exit
         }
@@ -189,7 +200,7 @@ while($whilemode){
                 }
                 write-host ""
                 write-host "Downloading content..." -ForegroundColor Cyan
-                .\yt-dlp -o "%(title)s.%(ext)s" -f $fcode $url
+                .\yt-dlp -o "powerdownloads\%(title)s.%(ext)s" -f $fcode $url
                 write-host ""
                 write-host "Successfully downloaded" -ForegroundColor Green
                 exit

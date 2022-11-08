@@ -1,6 +1,6 @@
 clear-host
 
-$ver = "1.7"
+$ver = "2.1 Development"
 
 write-host "Ver $ver"
 Write-host "Checking System..."
@@ -59,6 +59,19 @@ if (-not(get-command ffmpeg)) {
 }
 else {
     write-host "ffmpeg OK" -ForegroundColor Green
+}
+
+
+if(-not(test-path -path powerdownloads)){
+    if(Get-Command "yt-dlp" -ErrorAction SilentlyContinue){
+        write-host "Powerdownloaded folder not found, creating it..."
+        mkdir powerdownloads
+        write-host "Powerdownloads folder created successfully." -ForegroundColor Green
+    }
+    else{
+        write-warning "yt-dlp not found. Please install it manually."
+        break
+    }
 }
 
 function geturl {
