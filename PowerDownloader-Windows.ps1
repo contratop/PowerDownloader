@@ -65,7 +65,7 @@ function geturl{
 $whilemode = $true
 while($whilemode){
     clear-host
-    Write-host "PowerDownloader Version $ver"
+    Write-host "PowerDownloader Windows Version $ver"
     Write-host "by " -NoNewline
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""

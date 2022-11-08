@@ -4,92 +4,92 @@ $ver = "1.7"
 
 write-host "Ver $ver"
 Write-host "Checking System..."
-if(-not(test-path -path PowerDownloader-Linux.ps1)){
+if (-not(test-path -path PowerDownloader-Linux.ps1)) {
     Write-Warning "PowerDownloader-Linux.ps1 not found in current directory. Please run this script from the same directory as PowerDownloader-Linux.ps1"
     exit
 }
-else{
+else {
     write-host "Directory check passed." -ForegroundColor Green
 }
 
 
-if(-not(get-command pip)){
+if (-not(get-command pip)) {
     write-warning "Python PIP not found. Installing..."
     sudo apt install python3-pip
-    if(-not($?)){
+    if (-not($?)) {
         write-error "Failed to install PIP. Exiting..."
         write-host "command: [sudo apt install python3-pip]"
         exit
     }
-    else{
+    else {
         write-host "PIP installed successfully." -ForegroundColor Green
     }
 }
-else{
+else {
     write-host "pip OK" -foregroundcolor Green
 }
 
-if(-not(get-command yt-dlp)){
+if (-not(get-command yt-dlp)) {
     Write-Warning "YT-DLP is not installed. installing..."
     pip install yt-dlp
-    if(-not($?)) {
+    if (-not($?)) {
         Write-Error "Failed to install YT-DLP. Please install it manually."
         write-host "command: [pip install yt-dlp]"
         exit
     }
-    else{
+    else {
         Write-Host "YT-DLP installed successfully." -ForegroundColor Green
     }
 }
-else{
+else {
     Write-Host "yt-dlp OK" -ForegroundColor Green
 }
 
-if(-not(get-command ffmpeg)){
+if (-not(get-command ffmpeg)) {
     write-warning "FFMPEG is not installed. Installing..."
     sudo apt install ffmpeg
-    if(-not($?)){
+    if (-not($?)) {
         write-error "Failed to install FFMPEG. Please install it manually."
         write-host "command: [sudo apt install ffmpeg]"
         exit
     }
-    else{
+    else {
         write-host "FFMPEG installed successfully." -ForegroundColor Green
     }
 }
-else{
+else {
     write-host "ffmpeg OK" -ForegroundColor Green
 }
 
-function geturl{
+function geturl {
     $script:url = read.host "Paste your URL here"
 }
 
 $whilemode = $true
-while($whilemode){
+while ($whilemode) {
     Clear-Host
-    write-host "PowerDownloader Version $ver"
+    write-host "PowerDownloader Debian Version $ver"
     write-host "by" -NoNewline
     write-host "ContratopDev" -foregroundcolor Cyan
     write-host ""
-    if(-not(get-command yt-dlp)){
+    if (-not(get-command yt-dlp)) {
         write-warning "yt.dlp not detected. NUll functionallity."
     }
-    elseif(-not(get-command ffmpeg)){
+    elseif (-not(get-command ffmpeg)) {
         Write-Warning "ffmpeg not detected, funcionality is limited."
     }
-    if($url){
+    if ($url) {
         write-host "URL: $url" -ForegroundColor Cyan
         Write-host ""
         $urltitle = Invoke-RestMethod "https://title.mihit.ch/$url"
-        if($?){
+        if ($?) {
             write-host "Title: $urltitle" -ForegroundColor Cyan
         }
-        else{
+        else {
             write-host "Title: [Failed to get title]" -ForegroundColor Red
         }
     }
-    else{
+    else {
         write-host "URL: Not set"
         write-host ""
     }
@@ -100,13 +100,14 @@ while($whilemode){
     write-host "[4] About"
     write-host "[5] Quit" -ForegroundColor Cyan
     write-host ""
+    write-host "[torrent] Torrent mode" -ForegroundColor Green
     write-host "[advanced] Custom download"
     write-host ""
     $decision = read.host "pick an option"
-    switch($decision){
-        "url"  {geturl}
+    switch ($decision) {
+        "url" { geturl }
         "1" {
-            if(-not($url)){
+            if (-not($url)) {
                 geturl
             }
             Clear-Host
@@ -118,8 +119,8 @@ while($whilemode){
             write-host "Download finished." -ForegroundColor Green
             exit
         }
-        "2"{
-            if(-not($url)){
+        "2" {
+            if (-not($url)) {
                 geturl
             }
             Clear-Host
@@ -129,28 +130,28 @@ while($whilemode){
             write-host "Download finished" -ForegroundColor Green
             exit
         }
-        "3"{
+        "3" {
             write-host ""
             write-host "Updating PowerDownloader" -ForegroundColor Yellow
             write-host ""
             Remove-Item PowerDownloader-Linux.ps1
-            if(-not($?)){
+            if (-not($?)) {
                 sudo rm PowerDownloader-Linux.ps1
-                if(-not($?)){
+                if (-not($?)) {
                     write-error "Failed to remove old version. Please remove it manually."
                     write-host "command: [sudo rm PowerDownloader-Linux.ps1]"
                     exit
                 }
             }
             Invoke-WebRequest "https://raw.githubusercontent.com/ContratopDev/PowerDownloader/main/PowerDownloader-Linux.ps1" -OutFile PowerDownloader-Linux.ps1
-            if(-not($?)){
+            if (-not($?)) {
                 write-warning "Error when downloading the update"
                 exit
             }
             write-host "Updated succesfully." -ForegroundColor Green
             exit
         }
-        "4"{
+        "4" {
             write-host ""
             Write-host "PowerDownloader $ver" -ForegroundColor Cyan
             write-host "Made by ContratopDev in Powershell"
@@ -164,7 +165,7 @@ while($whilemode){
             exit
         }
         advanced {
-            if(-not($url)){
+            if (-not($url)) {
                 geturl
             }
             Clear-Host
@@ -178,17 +179,17 @@ while($whilemode){
             write-host "[best] "  -ForegroundColor Yellow -NoNewline
             write-host "for the best option in your case" -ForegroundColor Cyan
             $fcode = read-host "Select code format"
-            if($fcode -eq "Back"){
+            if ($fcode -eq "Back") {
                 write-host "REversing changes"
                 start-sleep -s 2
             }
-            else{
+            else {
                 clear-host
                 write-host "URL: $url"
-                if($fcode -eq "best"){
+                if ($fcode -eq "best") {
                     write-host "Format code: $fcode (Automatic Max Quality" -ForegroundColor Cyan
                 }
-                else{
+                else {
                     write-host "Format Code: $fcode (Manual)"
                 }
                 write-host ""
@@ -198,6 +199,33 @@ while($whilemode){
                 write-host "Siccessfully downloaded." -ForegroundColor Green
                 exit
             }
+        }
+        "torrent" {
+            Clear-Host
+            8### Check PowerTorrent-Windows ###
+            if (-not(test-path -path PowerTorrent-Linux.ps1)) {
+                write-warning "PowerTorrent-Linux.ps1 not found"
+                if (-not(test-path -path yt.dlp.exe)) {
+                    write-warning "Not on the same directory or PowerDownloaded not downloadef fully"
+                    $null = read-host "Press enter to exit"
+                    break
+                }
+                write-host "Downloading..."
+                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Linux.ps1" -OutFile "PowerTorrent-Linux.ps1"
+                if (-not($?)) {
+                    write-warning "Failed to download PowerTorrent-Linux.ps1"
+                    $null = read-host "Press enter to exit"
+                    break
+                }
+                else {
+                    write-host "Downloaded succesfully" -ForegroundColor Green
+                    start-sleep -s 2
+                }
+            }
+            ### Start PowerTorrent Linux ###
+            pwsh PowerTorrent-Linux.ps1
+            write-host "PowerTorrent finished" -ForegroundColor Green
+            $null = read-host "Press enter to back to PowerDownloader Menu"
         }
 
 

@@ -2,7 +2,7 @@
 clear-host
 
 $host.ui.RawUI.WindowTitle = "PowerTorrent by ContratopDev"
-$ver = "0.4"
+$ver = "0.5"
 
 function checkaria2 {
     $script:architectureproc = (Get-WmiObject -Class Win32_ComputerSystem).SystemType
@@ -64,7 +64,8 @@ function workdirselect {
         Set-Location $workdir
     }
     else {
-        Write-Host "Directory not found"
+        Write-Warning "Directory not found"
+        pause
         workdirselect
     }
 }
@@ -72,9 +73,9 @@ $loopmenu1 = $true
 while ($loopmenu1) {
     # MENU INICIAL ########################################################
     clear-host
-    write-host "----------------------------"
-    write-host "PowerTorrent by ContratopDev $ver"
-    write-host "----------------------------"
+    write-host "------------------------------------------------------------------------"
+    write-host "PowerTorrent Windows edition by ContratopDev $ver"
+    write-host "------------------------------------------------------------------------"
     ""
     if (test-path -path "aria2c64.exe") {
         write-host "Aria2c 64 bits Ready" -ForegroundColor Green
