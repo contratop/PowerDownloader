@@ -1,8 +1,8 @@
 Clear-Host
-$version = "1.0"
+$version = "1.1"
 write-host "PowerDownloader Safe Updater $version" -ForegroundColor Cyan
 
-function safecheck {
+function safecheckwin {
     # Check 1: Winget Check
     if (-not(Get-Command "winget" -ErrorAction SilentlyContinue)) {
         Write-Warning "Winget not found"
@@ -31,6 +31,41 @@ function safecheck {
         write-host "Git OK" -ForegroundColor Green
     }
     # Check 3: Same Directory
+    if (-not(test-path -path yt-dlp.exe)) {
+        write-host "Not detected in the same directory as yt-dlp.exe" -ForegroundColor Yellow
+        write-host "Current Directory: $pwd"
+        $check3 = Read-Host "Continue? (continue)"
+        if ($check3 -ne "continue") {
+            break
+        }
+
+    }
+    else {
+        write-host "Same Directory OK" -ForegroundColor Green
+    }
+
+}
+
+function safechecklinux {
+    # Check 1: Git Command
+    if (-not(Get-Command "git" -ErrorAction SilentlyContinue)) {
+        $check2 = Read-Host"Git not installed, install? (y/n)"
+        if ($check2 -eq "y") {
+            write-host "Installing Git"
+            sudo apt install git
+            write-host "Please restart the script after installing Git"
+            break
+        }
+        else {
+            write-host "Git not installed" -ForegroundColor Yellow
+            Write-Warning "Safe Updater will not work without Git"
+            break
+        }
+    }
+    else {
+        write-host "Git OK" -ForegroundColor Green
+    }
+    # Check 2: Same Directory
     if (-not(test-path -path yt-dlp.exe)) {
         write-host "Not detected in the same directory as yt-dlp.exe" -ForegroundColor Yellow
         write-host "Current Directory: $pwd"
