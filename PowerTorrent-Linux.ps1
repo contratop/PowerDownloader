@@ -44,6 +44,9 @@ if (-not(test-path -path powerdownloads)) {
     start-sleep -s 1
     Set-Location powerdownloads
 }
+else {
+    Set-Location powerdownloads
+}
 
 
 
