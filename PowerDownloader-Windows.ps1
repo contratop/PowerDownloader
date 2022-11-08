@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "2.1 Development"
+$ver = "2.1.1 Development"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -56,8 +56,10 @@ if(-not(test-path -path ffmpeg.exe)){
 if(-not(test-path -path powerdownloads)){
     if(test-path -path yt-dlp.exe){
         write-host "Powerdownloaded folder not found, creating it..."
+        start-sleep -s 1
         New-Item -ItemType Directory -Path powerdownloads
         write-host "Powerdownloads folder created" -ForegroundColor Green
+        start-sleep -s 1
     }
     else{
         write-warning "yt-dlp not found or PowerDownloader is damaged"

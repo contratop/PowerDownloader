@@ -1,6 +1,6 @@
 clear-host
 
-$ver = "2.1 Development"
+$ver = "2.1.1 Development"
 
 write-host "Ver $ver"
 Write-host "Checking System..."
@@ -65,8 +65,10 @@ else {
 if(-not(test-path -path powerdownloads)){
     if(Get-Command "yt-dlp" -ErrorAction SilentlyContinue){
         write-host "Powerdownloaded folder not found, creating it..."
+        start-sleep -s 1
         mkdir powerdownloads
         write-host "Powerdownloads folder created successfully." -ForegroundColor Green
+        start-sleep -s 1
     }
     else{
         write-warning "yt-dlp not found. Please install it manually."
