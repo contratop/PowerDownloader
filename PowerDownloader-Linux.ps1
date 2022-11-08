@@ -129,7 +129,7 @@ while ($whilemode) {
             write-host "URL: $url"
             write-host ""
             write-host "Downloading MP3..." -ForegroundColor Cyan
-            yt-dlp -o "%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
+            yt-dlp -o "powerdownloads/%(title)s.%(ext)s" --extract-audio --audio-format mp3 $url
             write-host ""
             write-host "Download finished." -ForegroundColor Green
             exit
@@ -141,7 +141,7 @@ while ($whilemode) {
             Clear-Host
             write-host "URL: $url"
             write-host "Downloading content in the best quality possible..." -ForegroundColor Cyan
-            yt-dlp -S ext:mp4:m4a -o "%(title)s.%(ext)s" $url
+            yt-dlp -S ext:mp4:m4a -o "powerdownloads/%(title)s.%(ext)s" $url
             write-host "Download finished" -ForegroundColor Green
             exit
         }
@@ -209,7 +209,7 @@ while ($whilemode) {
                 }
                 write-host ""
                 write-host "Downloading..." -ForegroundColor Cyan
-                yt-dlp -o "%(title)s.%(ext)s" -f $fcode $url
+                yt-dlp -o "powerdownloads/%(title)s.%(ext)s" -f $fcode $url
                 write-host ""
                 write-host "Siccessfully downloaded." -ForegroundColor Green
                 exit
