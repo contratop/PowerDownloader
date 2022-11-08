@@ -62,7 +62,7 @@ else {
 }
 
 function geturl {
-    $script:url = read.host "Paste your URL here"
+    $script:url = read-host "Paste your URL here"
 }
 
 $whilemode = $true
