@@ -1,6 +1,6 @@
 clear-host
 
-$ver = "2.1.1 Development"
+$ver = "2.2 Development"
 
 write-host "Ver $ver"
 Write-host "Checking System..."
@@ -158,7 +158,7 @@ while ($whilemode) {
                     exit
                 }
             }
-            Invoke-WebRequest "https://raw.githubusercontent.com/ContratopDev/PowerDownloader/main/PowerDownloader-Linux.ps1" -OutFile PowerDownloader-Linux.ps1
+            Invoke-WebRequest "https://raw.githubusercontent.com/ContratopDev/PowerDownloader/main/PowerDownloader-Linux.dat" -OutFile PowerDownloader-Linux.dat
             if (-not($?)) {
                 write-warning "Error when downloading the update"
                 exit
@@ -218,17 +218,17 @@ while ($whilemode) {
         "torrent" {
             Clear-Host
             8### Check PowerTorrent-Windows ###
-            if (-not(test-path -path PowerTorrent-Linux.ps1)) {
-                write-warning "PowerTorrent-Linux.ps1 not found"
+            if (-not(test-path -path PowerTorrent-Linux.dat)) {
+                write-warning "PowerTorrent-Linux.dat not found"
                 if (-not(test-path -path yt.dlp.exe)) {
                     write-warning "Not on the same directory or PowerDownloaded not downloadef fully"
                     $null = read-host "Press enter to exit"
                     break
                 }
                 write-host "Downloading..."
-                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Linux.ps1" -OutFile "PowerTorrent-Linux.ps1"
+                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Linux.dat" -OutFile "PowerTorrent-Linux.dat"
                 if (-not($?)) {
-                    write-warning "Failed to download PowerTorrent-Linux.ps1"
+                    write-warning "Failed to download PowerTorrent-Linux.dat"
                     $null = read-host "Press enter to exit"
                     break
                 }
@@ -238,7 +238,7 @@ while ($whilemode) {
                 }
             }
             ### Start PowerTorrent Linux ###
-            pwsh PowerTorrent-Linux.ps1
+            pwsh PowerTorrent-Linux.dat
             write-host "PowerTorrent finished" -ForegroundColor Green
             $null = read-host "Press enter to back to PowerDownloader Menu"
         }

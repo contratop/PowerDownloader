@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "2.1.1 Development"
+$ver = "2.2 Development"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -153,7 +153,7 @@ while($whilemode){
                 Write-host "Please run PowerDownloader in it's folder or install in a directory with permits" -ForegroundColor Yellow
                 exit
             }
-            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader-Windows.ps1" -OutFile PowerDownloader-Windows.ps1
+            Invoke-WebRequest -uri "https://raw.githubusercontent.com/contratop/PowerDownloader/main/PowerDownloader-Windows.dat" -OutFile PowerDownloader-Windows.dat
             if(-not($?)){
                 Write-host "Error when downloading the update"
                 exit
@@ -211,17 +211,17 @@ while($whilemode){
         "torrent" {
             Clear-Host
             ### Check PowerTorrent-Windows ###
-            if(-not(test-path -path PowerTorrent-Windows.ps1)){
-                Write-Warning "PowerTorrent-Windows.ps1 not found"
+            if(-not(test-path -path PowerTorrent-Windows.dat)){
+                Write-Warning "PowerTorrent-Windows.dat not found"
                 if(-not(test-path -path yt-dlp.exe)){
                     Write-Warning "Not on the same directory or PowerDownloader damaged"
                     $null = read-host "Press enter to exit"
                     break
                 }
                 write-host "Downloading..."
-                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Windows.ps1" -OutFile "PowerTorrent-Windows.ps1"
+                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/PowerTorrent-Windows.dat" -OutFile "PowerTorrent-Windows.dat"
                 if(-not($?)){
-                    Write-Warning "Could not download PowerTorrent-Windows.ps1"
+                    Write-Warning "Could not download PowerTorrent-Windows.dat"
                     $null = read-host "Press enter to exit"
                     break
                 }
@@ -231,7 +231,7 @@ while($whilemode){
                 }
             }
             ### Start PowerTorrent Windows ###
-            .\PowerTorrent-Windows.ps1
+            .\PowerTorrent-Windows.dat
             write-host "PowerTorrent finished" -ForegroundColor Green
             $null = read-host "Press enter to back to PowerDownloader Menu"
         }  
