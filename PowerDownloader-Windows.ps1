@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "2.3 Development"
+$ver = "2.4"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
