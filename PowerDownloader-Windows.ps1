@@ -211,17 +211,17 @@ while($whilemode){
         "torrent" {
             Clear-Host
             ### Check PowerTorrent-Windows ###
-            if(-not(test-path -path TorrentPower-Windows.dat)){
-                Write-Warning "TorrentPower-Windows.dat not found"
+            if(-not(test-path -path TorrentPower-Windows.ps1)){
+                Write-Warning "TorrentPower-Windows.ps1 not found"
                 if(-not(test-path -path yt-dlp.exe)){
                     Write-Warning "Not on the same directory or PowerDownloader damaged"
                     $null = read-host "Press enter to exit"
                     break
                 }
                 write-host "Downloading..."
-                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/TorrentPower-Windows.dat" -OutFile "TorrentPower-Windows.dat"
+                Invoke-WebRequest -uri "https://github.com/contratop/PowerDownloader/raw/main/TorrentPower-Windows.ps1" -OutFile "TorrentPower-Windows.ps1"
                 if(-not($?)){
-                    Write-Warning "Could not download TorrentPower-Windows.dat"
+                    Write-Warning "Could not download TorrentPower-Windows.ps1"
                     $null = read-host "Press enter to exit"
                     break
                 }
@@ -231,7 +231,7 @@ while($whilemode){
                 }
             }
             ### Start PowerTorrent Windows ###
-            .\TorrentPower-Windows.dat
+            .\TorrentPower-Windows.ps1
             write-host "PowerTorrent finished" -ForegroundColor Green
             $null = read-host "Press enter to back to PowerDownloader Menu"
         }  
