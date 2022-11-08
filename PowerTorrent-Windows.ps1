@@ -2,7 +2,7 @@
 clear-host
 
 $host.ui.RawUI.WindowTitle = "PowerTorrent by ContratopDev"
-$ver = "0.5"
+$ver = "0.7 Development"
 
 function checkaria2 {
     $script:architectureproc = (Get-WmiObject -Class Win32_ComputerSystem).SystemType
@@ -69,6 +69,17 @@ function workdirselect {
         workdirselect
     }
 }
+
+if (-not(test-path -path powerdownloads)) {
+    write-host "Powerdownloaded folder not found, creating it..."
+    start-sleep -s 1
+    New-Item -ItemType Directory -Path powerdownloads
+    write-host "Powerdownloads folder created" -ForegroundColor Green
+    start-sleep -s 1
+    Set-Location powerdownloads
+}
+
+
 $loopmenu1 = $true
 while ($loopmenu1) {
     # MENU INICIAL ########################################################
