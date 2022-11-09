@@ -2,7 +2,7 @@
 clear-host
 
 $host.ui.RawUI.WindowTitle = "PowerTorrent by ContratopDev"
-$ver = "0.7 Development"
+$ver = "1.0"
 
 function checkaria2 {
     $script:architectureproc = (Get-WmiObject -Class Win32_ComputerSystem).SystemType
@@ -91,11 +91,14 @@ while ($loopmenu1) {
     write-host "PowerTorrent Windows edition by ContratopDev $ver"
     write-host "------------------------------------------------------------------------"
     ""
-    if (test-path -path "aria2c64.exe") {
+    if (test-path -path "..\aria2c64.exe") {
         write-host "Aria2c 64 bits Ready" -ForegroundColor Green
+        $script:systype = "Aria2c64.exe"
+
     }
-    elseif (test-path -path "aria2c32.exe") {
+    elseif (test-path -path "..\aria2c32.exe") {
         write-host "Aria2c 32 bits Ready" -ForegroundColor Green
+        $script:systype = "Aria2c32.exe"
     }
     else {
         $script:ariafail = $true
@@ -116,7 +119,7 @@ while ($loopmenu1) {
         "1" {
             $torrent = Read-Host "Drag here the torrent file"
             write-host "Initializing torrent download... on $pwd" -ForegroundColor Cyan
-            .\aria2c64.exe $torrent
+            ..\.\$systype $torrent
             if (-not($?)) {
                 Write-Warning "Torrent download failed"
             }

@@ -2,7 +2,7 @@
 Clear-Host
 
 $host.UI.RawUI.WindowTitle = "PowerTorrent by ContratopDev"
-$ver = "0.7 Development"
+$ver = "1.0"
 
 function checkaria2 {
     if (Get-Command "aria2c" -ErrorAction SilentlyContinue) {
