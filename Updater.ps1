@@ -1,6 +1,11 @@
 Clear-Host
-$version = "1.1"
+$version = "1.2"
+$compilationversion = "0176"
 write-host "PowerDownloader Safe Updater $version" -ForegroundColor Cyan
+
+function compilationtracker {
+    $compilationversion
+}
 
 function safecheckwin {
     # Check 1: Winget Check
@@ -91,6 +96,9 @@ if ($mode -eq "1") {
 }
 elseif ($mode -eq "2") {
     safechecklinux
+}
+elseif ($mode -eq "compilation"){
+    compilationtracker
 }
 else {
     write-host "Invalid Mode"
