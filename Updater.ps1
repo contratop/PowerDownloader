@@ -98,6 +98,10 @@ elseif ($mode -eq "2") {
     safechecklinux
 }
 elseif ($mode -eq "compilation"){
+    Clear-Host
+    write-host "-------------------------------------------"
+    write-host "PowerDownloader Compilation" -ForegroundColor Cyan
+    write-host "-------------------------------------------"
     compilationtracker
     break
 }
