@@ -1,6 +1,6 @@
 Clear-Host
 
-$ver = "2.4"
+$ver = "2.5"
 
 Write-host "Ver $ver"
 Write-host "Checking System..."
@@ -83,7 +83,7 @@ while($whilemode){
     Write-host "ContratopDev" -ForegroundColor Cyan
     Write-host ""
     if(-not(test-path -path ffmpeg.exe)){
-        Write-Warning "Could not find ffmpeg, functionality is limited" -ForegroundColor Yellow
+        Write-Warning "Could not find ffmpeg, functionality is limited"
         write-host ""
     }
     if(-not(test-path -path yt-dlp.exe)){
@@ -223,6 +223,7 @@ while($whilemode){
                 if(-not($?)){
                     Write-Warning "Could not download TorrentPower-Windows.ps1"
                     $null = read-host "Press enter to exit"
+                    Set-Location ..
                     break
                 }
                 else{

@@ -1,6 +1,6 @@
 clear-host
 
-$ver = "2.4"
+$ver = "2.5"
 
 write-host "Ver $ver"
 Write-host "Checking System..."
