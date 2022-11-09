@@ -1,10 +1,10 @@
 Clear-Host
-$version = "1.2"
-$compilationversion = "0176"
+$version = "1.2.2"
+$compilationversion = "0176.4.6"
 write-host "PowerDownloader Safe Updater $version" -ForegroundColor Cyan
 
 function compilationtracker {
-    $compilationversion
+    write-host "PowerDownloader Compilation Version: $compilationversion"
 }
 
 function safecheckwin {
