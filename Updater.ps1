@@ -99,6 +99,7 @@ elseif ($mode -eq "2") {
 }
 elseif ($mode -eq "compilation"){
     compilationtracker
+    break
 }
 else {
     write-host "Invalid Mode"
